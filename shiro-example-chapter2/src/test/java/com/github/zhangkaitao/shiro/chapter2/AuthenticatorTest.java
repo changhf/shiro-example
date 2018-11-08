@@ -8,6 +8,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
 import org.apache.shiro.authz.ModularRealmAuthorizer;
 import org.apache.shiro.config.IniSecurityManagerFactory;
+import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.mgt.SessionsSecurityManager;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
@@ -25,12 +26,16 @@ import org.junit.Test;
  */
 public class AuthenticatorTest {
 
+    /**
+     * 全部成功
+     */
     @Test
     public void testAllSuccessfulStrategyWithSuccess() {
         login("classpath:shiro-authenticator-all-success.ini");
         Subject subject = SecurityUtils.getSubject();
 
-        //得到一个身份集合，其包含了Realm验证成功的身份信息
+        //得到一个身份集合，其包含了Realm验证成功的身份信息，
+        // principalCollection包含了zhang和zhang@163.com
         PrincipalCollection principalCollection = subject.getPrincipals();
         Assert.assertEquals(2, principalCollection.asList().size());
     }
@@ -40,6 +45,9 @@ public class AuthenticatorTest {
         login("classpath:shiro-authenticator-all-fail.ini");
     }
 
+    /**
+     * 返回所有验证成功的Realm认证信息
+     */
     @Test
     public void testAtLeastOneSuccessfulStrategyWithSuccess() {
         login("classpath:shiro-authenticator-atLeastOne-success.ini");
@@ -50,6 +58,9 @@ public class AuthenticatorTest {
         Assert.assertEquals(2, principalCollection.asList().size());
     }
 
+    /**
+     * 直返会第一个验证成功的认证信息
+     */
     @Test
     public void testFirstOneSuccessfulStrategyWithSuccess() {
         login("classpath:shiro-authenticator-first-success.ini");
@@ -82,11 +93,11 @@ public class AuthenticatorTest {
 
     private void login(String configFile) {
         //1、获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager
-        Factory<org.apache.shiro.mgt.SecurityManager> factory =
+        Factory<SecurityManager> factory =
                 new IniSecurityManagerFactory(configFile);
 
         //2、得到SecurityManager实例 并绑定给SecurityUtils
-        org.apache.shiro.mgt.SecurityManager securityManager = factory.getInstance();
+        SecurityManager securityManager = factory.getInstance();
         SecurityUtils.setSecurityManager(securityManager);
 
         //3、得到Subject及创建用户名/密码身份验证Token（即用户身份/凭证）

@@ -18,7 +18,6 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +25,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,11 +45,8 @@ public class AuthorizeController {
     private ClientService clientService;
 
     @RequestMapping("/authorize")
-    public Object authorize(
-            Model model,
-            HttpServletRequest request)
+    public Object authorize(Model model, HttpServletRequest request)
             throws URISyntaxException, OAuthSystemException {
-
         try {
             //构建OAuth 授权请求
             OAuthAuthzRequest oauthRequest = new OAuthAuthzRequest(request);
@@ -69,14 +64,14 @@ public class AuthorizeController {
 
             Subject subject = SecurityUtils.getSubject();
             //如果用户没有登录，跳转到登陆页面
-            if(!subject.isAuthenticated()) {
-                if(!login(subject, request)) {//登录失败时跳转到登陆页面
+            if (!subject.isAuthenticated()) {
+                if (!login(subject, request)) {//登录失败时跳转到登陆页面
                     model.addAttribute("client", clientService.findByClientId(oauthRequest.getClientId()));
                     return "oauth2login";
                 }
             }
 
-            String username = (String)subject.getPrincipal();
+            String username = (String) subject.getPrincipal();
             //生成授权码
             String authorizationCode = null;
             //responseType目前仅支持CODE，另外还有TOKEN
@@ -122,13 +117,13 @@ public class AuthorizeController {
     }
 
     private boolean login(Subject subject, HttpServletRequest request) {
-        if("get".equalsIgnoreCase(request.getMethod())) {
+        if ("get".equalsIgnoreCase(request.getMethod())) {
             return false;
         }
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        if(StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
+        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
             return false;
         }
 

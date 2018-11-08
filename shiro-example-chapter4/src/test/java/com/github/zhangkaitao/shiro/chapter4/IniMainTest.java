@@ -11,6 +11,7 @@ import org.apache.shiro.authz.permission.WildcardPermissionResolver;
 import org.apache.shiro.codec.Hex;
 import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.mgt.*;
+import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.subject.Subject;
@@ -30,10 +31,10 @@ public class IniMainTest {
     @Test
     public void test() {
 
-        Factory<org.apache.shiro.mgt.SecurityManager> factory =
+        Factory<SecurityManager> factory =
                 new IniSecurityManagerFactory("classpath:shiro-config-main.ini");
 
-        org.apache.shiro.mgt.SecurityManager securityManager = factory.getInstance();
+        SecurityManager securityManager = factory.getInstance();
 
         //将SecurityManager设置到SecurityUtils 方便全局使用
         SecurityUtils.setSecurityManager(securityManager);

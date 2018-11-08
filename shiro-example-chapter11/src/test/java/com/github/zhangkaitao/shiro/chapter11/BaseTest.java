@@ -70,11 +70,11 @@ public abstract class BaseTest {
         userService.correlationRoles(u1.getId(), r1.getId());
 
         //1、获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager
-        Factory<org.apache.shiro.mgt.SecurityManager> factory =
+        Factory<SecurityManager> factory =
                 new IniSecurityManagerFactory("classpath:shiro.ini");
 
         //2、得到SecurityManager实例 并绑定给SecurityUtils
-        org.apache.shiro.mgt.SecurityManager securityManager = factory.getInstance();
+        SecurityManager securityManager = factory.getInstance();
         SecurityUtils.setSecurityManager(securityManager);
 
     }
