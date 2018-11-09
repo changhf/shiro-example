@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
- * <p>Client: Zhang Kaitao
- * <p>Date: 14-2-14
- * <p>Version: 1.0
+ * 客户端管理控制器，管理客户端的注册
  */
 @Controller
 @RequestMapping("/client")

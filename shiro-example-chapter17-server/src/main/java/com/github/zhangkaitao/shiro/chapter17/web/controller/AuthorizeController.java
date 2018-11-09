@@ -32,9 +32,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * <p>User: Zhang Kaitao
- * <p>Date: 14-2-16
- * <p>Version: 1.0
+ * 授权控制器
  */
 @Controller
 public class AuthorizeController {

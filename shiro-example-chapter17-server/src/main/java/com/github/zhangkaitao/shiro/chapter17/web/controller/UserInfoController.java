@@ -23,9 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <p>User: Zhang Kaitao
- * <p>Date: 14-2-16
- * <p>Version: 1.0
+ * 资源控制器
  */
 @RestController
 public class UserInfoController {

@@ -14,7 +14,6 @@ import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.OAuthResponse;
 import org.apache.oltu.oauth2.common.message.types.GrantType;
-import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -27,9 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.net.URISyntaxException;
 
 /**
- * <p>User: Zhang Kaitao
- * <p>Date: 14-2-16
- * <p>Version: 1.0
+ * 访问令牌控制器
  */
 @RestController
 public class AccessTokenController {
