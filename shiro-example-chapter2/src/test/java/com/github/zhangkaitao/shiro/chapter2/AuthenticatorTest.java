@@ -34,8 +34,7 @@ public class AuthenticatorTest {
         login("classpath:shiro-authenticator-all-success.ini");
         Subject subject = SecurityUtils.getSubject();
 
-        //得到一个身份集合，其包含了Realm验证成功的身份信息，
-        // principalCollection包含了zhang和zhang@163.com
+        //得到一个身份集合，其包含了Realm验证成功的身份信息，principalCollection包含了zhang和zhang@163.com
         PrincipalCollection principalCollection = subject.getPrincipals();
         Assert.assertEquals(2, principalCollection.asList().size());
     }

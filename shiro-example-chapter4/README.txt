@@ -1,0 +1,2 @@
+ini用法
+NonConfigurationCreateTest和配置文件shiro-config.ini作用相同。

@@ -1,4 +1,4 @@
-package com.github.zhangkaitao.shiro.chapter10.session.scheduler;
+package com.github.zhangkaitao.shiro.chapter10.dao;
 
 import com.github.zhangkaitao.shiro.chapter10.JdbcTemplateUtils;
 import com.github.zhangkaitao.shiro.chapter10.SerializableUtils;
