@@ -2,10 +2,14 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <html>
 <head>
     <title></title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/css.css">
+    <link rel="stylesheet" href="<%=basePath%>/static/css/css.css">
 </head>
 <body>
 
@@ -40,31 +44,31 @@
         </shiro:hasPermission>
     </form:form>
 
-    <script src="${pageContext.request.contextPath}/static/js/jquery-1.11.0.min.js"></script>
+    <script src="<%=basePath%>/static/js/jquery-1.11.0.min.js"></script>
     <script>
         $(function() {
             $("#updateBtn").click(function() {
                 $("#form")
-                        .attr("action", "${pageContext.request.contextPath}/organization/${organization.id}/update")
+                        .attr("action", "<%=basePath%>/organization/${organization.id}/update")
                         .submit();
                 return false;
             });
             $("#deleteBtn").click(function() {
                 if(confirm("确认删除吗？")) {
                     $("#form")
-                            .attr("action", "${pageContext.request.contextPath}/organization/${organization.id}/delete")
+                            .attr("action", "<%=basePath%>/organization/${organization.id}/delete")
                             .submit();
                 }
                 return false;
             });
 
             $("#appendChildBtn").click(function() {
-                location.href="${pageContext.request.contextPath}/organization/${organization.id}/appendChild";
+                location.href="<%=basePath%>/organization/${organization.id}/appendChild";
                 return false;
             });
 
             $("#moveBtn").click(function() {
-                location.href="${pageContext.request.contextPath}/organization/${organization.id}/move";
+                location.href="<%=basePath%>/organization/${organization.id}/move";
                 return false;
             });
         });
