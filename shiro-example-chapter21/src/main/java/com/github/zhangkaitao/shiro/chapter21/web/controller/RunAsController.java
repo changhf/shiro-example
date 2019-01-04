@@ -42,15 +42,14 @@ public class RunAsController {
 
         Subject subject = SecurityUtils.getSubject();
         model.addAttribute("isRunas", subject.isRunAs());
-        if(subject.isRunAs()) {
+        if (subject.isRunAs()) {
             String previousUsername =
-                    (String)subject.getPreviousPrincipals().getPrimaryPrincipal();
+                    (String) subject.getPreviousPrincipals().getPrimaryPrincipal();
             model.addAttribute("previousUsername", previousUsername);
         }
 
         return "runas";
     }
-
 
 
     @RequestMapping("/grant/{toUserId}")
@@ -59,7 +58,7 @@ public class RunAsController {
             @PathVariable("toUserId") Long toUserId,
             RedirectAttributes redirectAttributes) {
 
-        if(loginUser.getId().equals(toUserId)) {
+        if (loginUser.getId().equals(toUserId)) {
             redirectAttributes.addFlashAttribute("msg", "自己不能切换到自己的身份");
             return "redirect:/runas";
         }
@@ -89,12 +88,12 @@ public class RunAsController {
         Subject subject = SecurityUtils.getSubject();
 
         User switchToUser = userService.findOne(switchToUserId);
-        if(loginUser.equals(switchToUser)) {
+        if (loginUser.equals(switchToUser)) {
             redirectAttributes.addFlashAttribute("msg", "自己不能切换到自己的身份");
             return "redirect:/runas";
         }
 
-        if(switchToUser == null || !userRunAsService.exists(switchToUserId, loginUser.getId())) {
+        if (switchToUser == null || !userRunAsService.exists(switchToUserId, loginUser.getId())) {
             redirectAttributes.addFlashAttribute("msg", "对方没有授予您身份，不能切换");
             return "redirect:/runas";
         }
@@ -110,8 +109,8 @@ public class RunAsController {
 
         Subject subject = SecurityUtils.getSubject();
 
-        if(subject.isRunAs()) {
-           subject.releaseRunAs();
+        if (subject.isRunAs()) {
+            subject.releaseRunAs();
         }
         redirectAttributes.addFlashAttribute("msg", "操作成功");
         redirectAttributes.addFlashAttribute("needRefresh", "true");
